@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
+import styles from "./FullPizza.module.scss";
 
 const FullPizza: React.FC = () => {
   const [pizza, setPizza] = React.useState<{
@@ -17,7 +18,6 @@ const FullPizza: React.FC = () => {
     async function fetchPizza() {
       try {
         const { data } = await axios.get(
-          // "https://62fa5b16ffd7197707eabb3d.mockapi.io/items/" + id
           " https://630f407537925634188b0362.mockapi.io/items/" + id
         );
         setPizza(data);
@@ -35,10 +35,12 @@ const FullPizza: React.FC = () => {
   }
 
   return (
-    <div className="container">
-      <img src={pizza.imageUrl} />
-      <h2>{pizza.name}</h2>
-      <h4>{pizza.price} $</h4>
+    <div className={styles.flex}>
+      <img src={pizza.imageUrl} className={styles.fullPizza} />
+      <div>
+        <h2>{pizza.name}</h2>
+        <h4>{pizza.price} $</h4>
+      </div>
       <Link to="/">
         <button className="button button--outline button--add">
           <span>Back</span>
